@@ -4,8 +4,9 @@
  * Конфигурационный файл приложения
  */
 
-use Aigletter\Core\Components\Hello\HelloFactory;
-use Aigletter\Core\Components\Router\RouterFactory;
+use Iliah\Core\Components\Hello\HelloFactory;
+use Iliah\Core\Components\Logger\Logger;
+use Iliah\Core\Components\Router\RouterFactory;
 use App\Component\Test\TestFactory;
 
 return [
@@ -19,7 +20,8 @@ return [
         ],
         'test' => [
             'factory' => TestFactory::class,
-        ]
+        ],
+        'logger' => Logger::class
     ],
     // ...
     // Здесь могут содержаться другие настройки приложения, кроме сервисов

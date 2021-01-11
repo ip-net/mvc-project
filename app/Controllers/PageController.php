@@ -4,7 +4,8 @@
 namespace App\Controllers;
 
 
-use Aigletter\Core\Application;
+use Iliah\Core\Application;
+use Iliah\Core\Components\Logger\Logger;
 
 /**
  * Class PageController
@@ -17,6 +18,13 @@ class PageController
     /**
      * Действие по умолчанию
      */
+    protected $logger;
+
+    public function __construct()
+    {
+        $this->logger = Logger::getInstance();
+    }
+
     public function indexAction()
     {
         echo 'IndexAction PageController';
@@ -27,6 +35,7 @@ class PageController
      */
     public function viewAction()
     {
+        $this->logger->info("class PageController. viewAction");
         $app = Application::getInstance();
         if ($app->has('test')) {
             echo $app->get('test')->run();

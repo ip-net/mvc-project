@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Aigletter\Core\Contracts;
+namespace Iliah\Core\Contracts;
 
 
 /**
@@ -11,7 +11,7 @@ namespace Aigletter\Core\Contracts;
  * Каждая конкретаная фабрика сервиса должна реализовать метод createConcreteInstance
  * Паттерн Factory method
  *
- * @package Aigletter\Core\Contracts
+ * @package Iliah\Core\Contracts
  */
 abstract class ComponentFactoryAbstract
 {

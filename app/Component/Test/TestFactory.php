@@ -4,8 +4,8 @@
 namespace App\Component\Test;
 
 
-use Aigletter\Core\Contracts\ComponentAbstract;
-use Aigletter\Core\Contracts\ComponentFactoryAbstract;
+use Iliah\Core\Contracts\ComponentAbstract;
+use Iliah\Core\Contracts\ComponentFactoryAbstract;
 
 class TestFactory extends ComponentFactoryAbstract
 {

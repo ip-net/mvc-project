@@ -4,7 +4,7 @@
 namespace App\Component\Test;
 
 
-use Aigletter\Core\Contracts\ComponentAbstract;
+use Iliah\Core\Contracts\ComponentAbstract;
 
 class Test extends ComponentAbstract
 {

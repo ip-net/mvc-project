@@ -1,14 +1,14 @@
 <?php
 
 
-namespace Aigletter\Core\Contracts;
+namespace Iliah\Core\Contracts;
 
 
 /**
  * Interface RunnableInterface
  * Интерфейс для запуска приложения
  *
- * @package Aigletter\Core\Contracts
+ * @package Iliah\Core\Contracts
  */
 interface RunnableInterface
 {

@@ -1,33 +1,34 @@
 <?php
 
 
-namespace Aigletter\Core\Components\Router;
+namespace Iliah\Core\Components\Router;
 
 
-use Aigletter\Core\Components\Router\Router;
-use Aigletter\Core\Components\Router\Router;
-use Aigletter\Core\Contracts\ComponentAbstract;
-use Aigletter\Core\Contracts\ComponentFactoryAbstract;
+use Iliah\Core\Components\Router\Router;
+use Iliah\Core\Contracts\ComponentAbstract;
+use Iliah\Core\Contracts\ComponentFactoryAbstract;
 
 /**
  * Class RouterFactory
  * Фабрика, умеющая создавать экземпляр роутера
  * Паттерн Factory Method
  *
- * @package Aigletter\Core\Components\Router
+ * @package Iliah\Core\Components\Router
  */
-class RouterFactory extends ComponentFactoryAbstract, Router/**
+class RouterFactory extends ComponentFactoryAbstract
+ /**
+ *
  * @inheritDoc
  */
-    protected function createConcreteInstance(): ComponentAbstract
-    {
-        // TODO: Implement createConcreteInstance() method.
-    }, Router
 {
+
     /**
      * Фабричный метод для создания экземпляра конкретного сервиса
      * @return ComponentAbstract
      */
+
+
+
     protected function createConcreteInstance(): ComponentAbstract
     {
         return new Router();

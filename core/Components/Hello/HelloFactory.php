@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Aigletter\Core\Components\Hello;
+namespace Iliah\Core\Components\Hello;
 
 
-use Aigletter\Core\Contracts\ComponentAbstract;
-use Aigletter\Core\Contracts\ComponentFactoryAbstract;
+use Iliah\Core\Contracts\ComponentAbstract;
+use Iliah\Core\Contracts\ComponentFactoryAbstract;
 
 /**
  * Class HelloFactory
@@ -14,7 +14,7 @@ use Aigletter\Core\Contracts\ComponentFactoryAbstract;
  *
  * Паттерн Factory Method
  *
- * @package Aigletter\Core\Components\Hello
+ * @package Iliah\Core\Components\Hello
  */
 class HelloFactory extends ComponentFactoryAbstract
 {

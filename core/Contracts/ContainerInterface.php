@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Aigletter\Core\Contracts;
+namespace Iliah\Core\Contracts;
 
 
 /**
@@ -10,7 +10,7 @@ namespace Aigletter\Core\Contracts;
  *
  * Про контейнеры станет понятнее после соответствующей темы о Dependency Injection
  *
- * @package Aigletter\Core\Contracts
+ * @package Iliah\Core\Contracts
  */
 interface ContainerInterface
 {

@@ -1,20 +1,22 @@
 <?php
 
 
-namespace Aigletter\Core;
+namespace Iliah\Core;
 
 
-use Aigletter\Core\Components\Router\Router;
-use Aigletter\Core\Contracts\BootstrapInterface;
-use Aigletter\Core\Contracts\ContainerInterface;
-use Aigletter\Core\Contracts\RunnableInterface;
+//use Iliah\Core\Components\Router\Router;
+use Iliah\Core\Components\Logger\Logger;
+use Iliah\Core\Contracts\BootstrapInterface;
+use Iliah\Core\Contracts\ContainerInterface;
+use Iliah\Core\Contracts\RunnableInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class Application
  * Класс прилоежния - контейнер, который содержит различные сервисы.
  * Приложение можно конфигурировать - добавлять и удалять различные севрисы
  *
- * @package Aigletter\Core
+ * @package Iliah\Core
  */
 class Application implements BootstrapInterface, ContainerInterface, RunnableInterface
 {
@@ -40,17 +42,22 @@ class Application implements BootstrapInterface, ContainerInterface, RunnableInt
      */
     protected $instances = [];
 
+    protected $logger;
+
+    protected $path = '/var/log/log.log';
+
     /**
      * Метод для получения экземпляра приложения.
      * Паттерн Singleton
      *
      * @param array $config
+     * @param LoggerInterface|null $logger
      * @return Application
      */
-    public static function getInstance($config = [])
+    public static function getInstance($config = [])//, LoggerInterface $logger = null)
     {
         if (self::$instance === null) {
-            self::$instance = new self($config);
+            self::$instance = new self($config);//, $logger);
         }
 
         return self::$instance;
@@ -60,10 +67,15 @@ class Application implements BootstrapInterface, ContainerInterface, RunnableInt
      * Application constructor.
      *
      * @param array $config Массив конфигураций
+     * @param LoggerInterface|null $logger
      */
-    protected function __construct($config = [])
+    protected function __construct($config = [])//, LoggerInterface $logger = null)
     {
         $this->config = $config;
+        //$this->logger = $logger;
+        $this->logger = Logger::getInstance();
+
+        $this->logger->info("class Application. construct");
 
         $this->bootstrap();
     }
@@ -75,8 +87,13 @@ class Application implements BootstrapInterface, ContainerInterface, RunnableInt
     public function bootstrap()
     {
         if (!empty($this->config['components'])) {
+            $this->logger->info("class Application. bootstrap");
             // Перебираем массив сервисов из конфига и разбиаем каждый сервис - проверяем есть ли у него фабрика
             foreach ($this->config['components'] as $key => $item) {
+                if (isset($item['logger']) && class_exists('logger'))
+                {
+
+                }
                 if (isset($item['factory']) && class_exists($item['factory'])) {
                     // Здесь мы не создаем обьекты, а лишь добавляем привязку имени сервиса и фабрики
                     $this->components[$key] = $item['factory'];
@@ -93,6 +110,7 @@ class Application implements BootstrapInterface, ContainerInterface, RunnableInt
      */
     public function get($name)
     {
+        $this->logger->info("class Application. get");
         // Если экземпляр севриса уже был ранее создан, просто достаем его из контейнера и возвращаем
         if (isset($this->instances[$name])) {
             return $this->instances[$name];
@@ -124,6 +142,7 @@ class Application implements BootstrapInterface, ContainerInterface, RunnableInt
      */
     public function has($name)
     {
+        $this->logger->info("class Application. has");
         // Сначала проверяем есть ли уже готовый экземпляр севриса по его имени, если есть возвращаем true
         if (isset($this->instances[$name])) {
             return true;
@@ -135,6 +154,7 @@ class Application implements BootstrapInterface, ContainerInterface, RunnableInt
         }
 
         // В случае если дошли до этого момента, значит ни экземпляра нет ни привязки нет
+        $this->logger->warning("class Application. has no object");
         return false;
     }
 
@@ -143,6 +163,7 @@ class Application implements BootstrapInterface, ContainerInterface, RunnableInt
      */
     public function run()
     {
+        $this->logger->info("run");
         // Получаем с контейнера севрис router, запускаем роутинг и вызываем функцию, которую вернет роутер
         $router = $this->get('router');
         if ($action = $router->route()) {

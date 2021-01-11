@@ -1,21 +1,20 @@
 <?php
 
 
-namespace Aigletter\Core\Components\Router;
+namespace Iliah\Core\Components\Router;
 
 
-use Aigletter\Core\Application;
-use Aigletter\Core\Application;
-use Aigletter\Core\Contracts\ComponentAbstract;
+use Iliah\Core\Components\Logger\Logger;
+use Iliah\Core\Contracts\ComponentAbstract;
 
 /**
  * Class Router
  * Полезный сервис, который занимается роутингом (маршрутизацией).
  * Суть его в том, чтобы определить какое действие (какой метод какого класса) нужно выполнить по каждому конкретному запросу (урлу)
  *
- * @package Aigletter\Core\Components\Router
+ * @package Iliah\Core\Components\Router
  */
-class Router extends ComponentAbstract, Application, Application
+class Router extends ComponentAbstract
 {
     /**
      * Пока данный метод парсит строку и по пути запроса определяем контроллер и метод, который нужно вызвать
@@ -24,8 +23,17 @@ class Router extends ComponentAbstract, Application, Application
      * @return \Closure
      * @throws \Exception
      */
+
+    protected $logger;
+
+    public function __construct()
+    {
+        $this->logger = Logger::getInstance();
+    }
+
     public function route()
     {
+        $this->logger->info("class Router. route");
         // Получаем путь с адресной строки
         $path = explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 

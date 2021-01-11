@@ -1,14 +1,14 @@
 <?php
 
 
-namespace Aigletter\Core\Contracts;
+namespace Iliah\Core\Contracts;
 
 
 /**
  * Class ComponentAbstract
  * Абстракный класс, который должны наследовать все севрисы
  *
- * @package Aigletter\Core\Contracts
+ * @package Iliah\Core\Contracts
  */
 abstract class ComponentAbstract implements BootstrapInterface
 {
